@@ -4,7 +4,7 @@ import numpy as np
 
 # ~~~~~~~~~~~~~~~ x ~~~~~~~~~~~~~~~ x ~~~~~~~~~~~~~~~ x ~~~~~~~~~~~~~~~
 # Parâmetros de Dataset:
-file_path = "dados/conservante_bebidas.csv" # Caminho do dataset
+file_path = "data/conservante_bebidas.csv" # Caminho do dataset
 skip_rows = 1 # Número de linhas a pular para carregar os dados brutos do arquivo com os dados (ex: pular a linha que contém o título)
 split_percentual = 0.8 # Divisão treino/teste
 num_classes = 3 # Quantidade de classes (rótulos) do dataset
@@ -22,7 +22,7 @@ network_name = "net_1" # Nome da rede (para salvar nos resultados)
 epochs = 100 # Quantidade de épocas
 save_results = True # Se deseja salvar os resultados
 save_weights = True # Se deseja salvar os pesos
-summarize = False # Resumir os resultados de treinamento
+summarize = True # Resumir os resultados de treinamento
 plot_results = True # Mostrar os gráficos dos resultados de treino
 
 # ~~~~~~~~~~~~~~~ x ~~~~~~~~~~~~~~~ x ~~~~~~~~~~~~~~~ x ~~~~~~~~~~~~~~~

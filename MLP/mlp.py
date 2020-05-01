@@ -200,7 +200,7 @@ class MLP:
         if(not os.path.isdir(self.save_path)): os.mkdir(self.save_path)
         full_path = self.save_path + self.network_name + ".npy"
         np.save(full_path, [[self.network_name], self.weights], allow_pickle=True, fix_imports=True)
-        print("Weights saved in: \"{}\"".format(full_path))
+        print("Weights saved in: \"{}\"\n".format(full_path))
 
     def load_from_path(self, path):
         # Carrega, do caminho "path", pesos de uma rede
@@ -251,9 +251,9 @@ class MLP:
             err /= trainset_size
             error.append(err)
             if(epoch<epochs):
-                print("Epoch: {}; Hits: {} of {}; Error: {}".format(epoch, acc, trainset_size, err), end='\r')
+                print("Epoch: {}; Hits: {} of {}; Accuracy: {:.1f}%; Error: {:.5f}".format(epoch, acc, trainset_size, 100*accuracy[-1], err), end='\r')
             else: 
-                print("Epoch: {}; Hits: {} of {}; Error: {}".format(epoch, acc, trainset_size, err))
+                print("Epoch: {}; Hits: {} of {}; Accuracy: {:.1f}%; Error: {:.5f}".format(epoch, acc, trainset_size, 100*accuracy[-1], err))
                 self.printline()
 
         self.make_results(epochs, accuracy, error, trainset_size, len(data_X[0]), save_name)
@@ -270,11 +270,12 @@ class MLP:
             error += self.vec_error_function(target, pred)
             if(self.index_of_max_value(pred) == self.index_of_max_value(target)): accuracy += 1
         error /= testset_size
-        accuracy /= float(testset_size)
+        acc = accuracy/float(testset_size)
         if(_print):
             print("Test results:\n")
-            print("- Accuracy:", accuracy)
-            print("- Error:", error)
+            print("- Hits: {} of {}".format(accuracy, testset_size))
+            print("- Accuracy: {:.1f}%".format(100*acc))
+            print("- Error: {:.5f}".format(error))
             self.printline()
         return accuracy, error
 
@@ -287,11 +288,9 @@ class MLP:
         results.append("Network informations:")
         results.append(" - Network name: " + self.network_name)
         results.append(" - Network architecture: " + str(self.layers))
-        results.append(" - Weights saved in: \"" + self.save_path + self.network_name + ".npy\"")
-        results.append(" - Results saved in: \"" + self.results_path + self.network_name + "_" + save_name + ".npy\"")
         results.append("")
-        results.append("Dataset informations:")
-        results.append(" - Amount of samples: " + str(amount_of_data))
+        results.append("Trainset informations:")
+        results.append(" - Amount of training samples: " + str(amount_of_data))
         results.append(" - Sample size: " + str(data_size))
         results.append("")
         results.append("Train parameters:")
@@ -316,12 +315,10 @@ class MLP:
         if(summarize): 
             for line in self.last_results[-5:-3]: 
                 print(line)
-            self.printline()
         else: 
             for line in self.last_results[:-3]: 
                 print(line)
-            print()
-            self.printline()
+        self.printline()
 
     def plot_acc_err(self):
         plt.subplot(1,2,1)
