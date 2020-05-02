@@ -177,7 +177,7 @@ class MLP:
             for n in range(self.layers[i+1]):
                 for j in range(len(self.activations[i])):
                     delta = self.learning_rate * self.deltas[i+1][n] * self.activations[i][j]
-                    self.weights[i][n][j] += delta # + self.momentum * self.old_deltas[i][n][j]
+                    self.weights[i][n][j] += delta + self.momentum * self.old_deltas[i][n][j]
                     self.old_deltas[i][n][j] = delta
                 self.weights[i][n][-1] += self.learning_rate * self.deltas[i+1][n] # Bias update
 
