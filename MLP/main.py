@@ -13,7 +13,7 @@ load_titles = True # Informa se quer carregar os títulos dos dados (para um pri
 # Parâmetros da arquitetura da rede:
 hidden_layers = [15] # A quantidade de números no array é a qtd de camadas escondidas, cada número representa a qtd de neurônios
 learning_rate = 0.1 # Taxa de aprendizagem
-momentum = 0.1 # Momento
+momentum = 0.9 # Momento
 activation_function = "sigmoid" # Função de ativação
 error_function = "mse" # Função de erro
 network_name = "net_1" # Nome da rede (para salvar nos resultados)
